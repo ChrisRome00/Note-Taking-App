@@ -29,14 +29,25 @@ app.get('/notes', (req, res) => {
 });
 
 // GET * should return the index.html file
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
 // Create API Routes
 
-// GET /api/routs should read the db.json file and return all saved notes as JSON
-
+// GET /api/routes should read the db.json file and return all saved notes as JSON
+app.get('/api/routes', (req, res) => {
+    console.info(`${req.method} request was sent to return all saved notes`);
+    //read json file
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            //return all saved notes as json
+            res.send(JSON.parse(data));
+        }
+    })
+})
 
 // POST /api/notes should recieve a new note to save on the request body, add it to the db.json file, 
 // and then return the new note to the client. You'll need to find a way to give each note a unique id 
