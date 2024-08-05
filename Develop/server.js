@@ -5,23 +5,23 @@ const express = require("express");
 // We are going to be reaading and writing to a file
 const fs = require("fs");
 
-// ? not really sure what this does
+// Imports the path module, helps with constructing file paths
 const path = require('path');
 
-// ?
+// helper function to generate a unique id
 const uuid = require('./helpers/uuid');
 
-//Where we are going to be importing, focus on Render.com after modularizing
-PORT = 3001;
+//Where we are going to be holding our server to be listening for requests, if web hosting dne, use local
+PORT = process.env.PORT || 3001;
 
-// Create app  for express
+// Create app for express
 const app = express();
 
 // Incoreperate middleware for parsing JSON and url encoded data
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// Middleware to serve yo static assets from the public folder
+// Middleware to serve up static assets from the public folder
 app.use(express.static('public'));
 
 // Create HTML Routes
@@ -106,6 +106,7 @@ app.post('/api/notes', (req, res) => {
 // the given id property, and then rewrite the notes to the db.json file.
 
 app.delete('/api/notes/:id', (req, res) => {
+    console.info(`${req.method} request received to delete a note`);
     // Pull the value thats in the req.params object, which is going to be the specific id
     const { id } = req.params;
     // Read all notes from json
