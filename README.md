@@ -3,15 +3,9 @@
 
 This app aims to dynamically create and delete notes using get, post, and delete requests from the user to the server.
 
-## Table of Contents
-  
-[Installation](#installation)
-
-[Usage](#usage)
-
-[License](#license)
-
-[Questions](#questions)
+## Preview Image
+![image](https://github.com/user-attachments/assets/5317c55b-be4f-43d0-ab78-089f32c5d35c)
+Link: https://note-taking-app-503b.onrender.com
 
 ## Usage
 
