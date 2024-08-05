@@ -105,6 +105,39 @@ app.post('/api/notes', (req, res) => {
 // In order to delete a note, you'll need to read all notes from the db.json file, remove the note with 
 // the given id property, and then rewrite the notes to the db.json file.
 
+app.delete('/api/notes/:id', (req, res) => {
+    // Pull the value thats in the req.params object, which is going to be the specific id
+    const { id } = req.params;
+    // Read all notes from json
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error(err);
+        } else {
+            let notes = JSON.parse(data);
+            const filteredNotes = notes.filter(note => note.id !== id);
+            fs.writeFile('./db/db.json', JSON.stringify(filteredNotes), (writeErr) => {
+                writeErr ? console.error(writeErr) : console.info('Successfully updated Notes!');
+            });
+
+            const response = {
+                status: 'sucess',
+                body: filteredNotes
+            };
+        
+            console.log(response);
+            res.status(201).json(response);
+        }
+    });
+
+    // const response = {
+    //     status: 'sucess',
+    //     body: filteredNotes
+    // };
+
+    // console.log(response);
+    // res.status(201).json(response);
+});
+
 // Create listen to activate server
 app.listen(PORT, () =>{
     console.log(`App listening at http://localhost:${PORT}`);
