@@ -12,7 +12,7 @@ const path = require('path');
 const uuid = require('./helpers/uuid');
 
 //Where we are going to be holding our server to be listening for requests, if web hosting dne, use local
-PORT = process.env.PORT || 3001;
+port = process.env.PORT || 3001;
 
 // Create app for express
 const app = express();
@@ -140,6 +140,6 @@ app.delete('/api/notes/:id', (req, res) => {
 });
 
 // Create listen to activate server
-app.listen(PORT, () =>{
-    console.log(`App listening at http://localhost:${PORT}`);
+app.listen(port, () =>{
+    console.log(`App listening at http://localhost:${port}`);
 })
